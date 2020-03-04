@@ -98,11 +98,11 @@ John White (NeIC) {\tt john.white@cern.ch}}}
 \large July 4$^{\rm th}$ 2019 & Version sent to Anders \\ \hline
 \large August 19$^{\rm th}$ 2019 & Version sent SG \\
 \hline
-\large October 17^{\rm th}$ 2019 & SG recommends update\\
+\large October 17$^{\rm th}$ 2019 & SG recommends update\\
 \hline
-\large Feb 19^{\rm th}$ 2020 & Second version to Anders for review \\
+\large February 19$^{\rm th}$ 2020 & Second version to Anders for review \\
 \hline
-\large  & Second version to SG for acceptance \\
+\large March 4$^{\rm th}$ 2020 & Second version to SG for acceptance \\
 \hline
 \end{tabular}
 \end{center}
@@ -266,7 +266,7 @@ The \RB + \SBF node, as shown in Figure~\ref{fig-rb-node}, then consists of foll
 \item Second Beam Former  (SBF);
 \item Ring Buffer (RB);
 \item Event Writer(EW);
-\item Fast access storage (SSD).
+\item Fast solid state storage (SSD).
 \end{itemize}
 
 \begin{figure}
@@ -428,7 +428,7 @@ Accelerator cards should be connected together using fast network or direct card
 \label{sec:filewriter}
 
 As described, it must be possible to write both raw \RB data and the up to \NNB narrow beams to disk, with a bandwidth of at least \NBW in the first stage of the \ED implementation. 
- The raw complex IQ domain voltage data shall be kept in online storage for reanalysis for a limited time, after which a certain fraction of interesting raw data shall be selected for permanent archival.  
+ The raw complex IQ domain voltage data shall be kept in online storage for reanalysis for a limited time, after which a certain fraction of the interesting raw data shall be archived permanently.  
  
  It is thus necessary to implement dedicated file writer processes. These file writers will be triggered by the radar controller based on events in the event list, waking up when data from a certain experiment/beam combination should be written. 
 
@@ -683,7 +683,7 @@ The file transfer benchmark should evaluate the performance, usability, and reli
 %\label{ssec:file-tr-tests}
 
 Such file transfer tests have been performed between sites with high-speed connections to the Nordic NRENs.  The E3DDS project was granted storage on Swestore (SNIC allocation 2018/12-18).  This is a distributed dCache system with access through WebDAV, and GridFTP (and possibly more exotic protocols like xrootd should it be required). 
-On top of Swestore we deployed an instance of Rucio and replicated sets of existing EISCAT data or big random files. Results from these tests are available at the NeIC web page {\url{ https://wiki.neic.no/int/E3DDS_Data_Transfer_Tests}}.
+On top of Swestore we deployed an instance of Rucio and replicated sets of existing EISCAT data or big random files. Results from these tests are available at~\cite{data-transfer-tests}.
 
 %, a data management system that originated from the LHC ATLAS experiment. 
 % \todo[inline]{Link to Vincent's presentation here}
