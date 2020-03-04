@@ -28,6 +28,8 @@
 
 \usepackage{gensymb}
 
+\usepackage[titletoc,title]{appendix}
+
 % \usepackage{draftwatermark}
 % \SetWatermarkText{draft v2}
 % \SetWatermarkScale{6}
@@ -55,15 +57,16 @@
 {\bf Deliverable Document 2} \\
 On-site data processing simulation}
 \author{E3DDS Team~\footnote{
-Anders Tjulin (EISCAT) {\tt anders.tjulin@eiscat.se};
-Ari Lukkarinen (CSC) {\tt ari.lukkarinen@csc.fi};
-Assar Westman (EISCAT) {\tt Assar.Westman@eiscat.se};
+Simon Brown (EISCAT) {\tt simon.brown@eiscat.se};
 Carl-Fredrik Enell (EISCAT) {\tt carl-fredrik.enell@eiscat.se};
-Dan Johan Jonsson (UiT) {\tt dan.jonsson@uit.no};
-Janos Nagy (NSC) {\tt fconagy@nsc.liu.se};
-Harri Hellgren (EISCAT) {\tt harri.hellgren@eiscat.se};
 Ingemar H\"{a}ggstr\"{o}m (EISCAT) {\tt ingemar.haggstrom@eiscat.se};
+Harri Hellgren (EISCAT) {\tt harri.hellgren@eiscat.se};
+Dan Johan Jonsson (UiT) {\tt dan.jonsson@uit.no};
+Ari Lukkarinen (CSC) {\tt ari.lukkarinen@csc.fi};
+Janos Nagy (NSC) {\tt fconagy@nsc.liu.se};
+Anders Tjulin (EISCAT) {\tt anders.tjulin@eiscat.se};
 Mattias Wadenstein (UmU) {\tt maswan@hpc2n.umu.se};
+Assar Westman (EISCAT) {\tt Assar.Westman@eiscat.se};
 % Roy Dragseth (UiT) {\tt roy.dragseth@uit.no};
 John White (NeIC) {\tt john.white@cern.ch}}}
 
@@ -95,9 +98,11 @@ John White (NeIC) {\tt john.white@cern.ch}}}
 \large July 4$^{\rm th}$ 2019 & Version sent to Anders \\ \hline
 \large August 19$^{\rm th}$ 2019 & Version sent SG \\
 \hline
-\large October 17th 2019 & SG recommends update\\
+\large October 17^{\rm th}$ 2019 & SG recommends update\\
 \hline
-\large Feb 19th 2010 & Second version to SG \\
+\large Feb 19^{\rm th}$ 2020 & Second version to Anders for review \\
+\hline
+\large  & Second version to SG for acceptance \\
 \hline
 \end{tabular}
 \end{center}
@@ -180,16 +185,16 @@ A \emph{Scheduler} process selects which events are executed at a given time and
 
 \subsection{Relational database}
 
-Some relational databases are available and the choice between may be difficult. 
+There are many relational databases available and the choice of any particular database may be arbitrary.
 The E3DDS project, however, recommends to use the PostgreSQL database~\cite{postgresql}, which is one of the most widely used databases. 
 At the moment there are not any special requirements for the database which should drive the database selection towards any more specialized product.
 
 \subsection{Messaging system}
 The aim of the fast control system is to be able to change radar operation parameters within a few seconds timescale. 
-During this time, data has to be received, analyzed, decision made to change the radar parameters, new parameters calculated, and new commands send to all sites. 
+During this time data has to be: received and analyzed; a decision made to change the radar parameters; new parameters calculated: and new commands sent to all sites. 
 
 A number of suitable messaging systems are available and after some testing E3DDS recommends Redis~\cite{redis}. Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache and message broker. 
-Redis has been tested as a message broker and in-memory cache. 
+Redis has been tested as a message broker and in-memory cache~\cite{redis-testing}.
 % Do we have results available? JSW
 % Check with Assar.
 
@@ -451,7 +456,7 @@ This gives a total data rate of 10 GByte/s. Fastest SSD disks have continuous wr
 
 \HDF is a container format whose content is flexible. An open \HDF file presents a directory-like structure through the high-level API. The library is written in \CP with interfaces to Python and several other languages, including proprietary ones such as Matlab, which covers all foreseen \ED use cases. 
 
-Whereas the \HDF library presents a high level view of the data, the actual data written to disk are sorted in a B-tree structure for fastest random access. Several storage backends are selectable. Features including data chunk sizes, bit shuffling and compression of data can all be tweaked through the API.
+Whereas the \HDF library presents a high level view of the data, the actual data written to disk is a binary stream which can be chunked for fastest random access and also compressed. Several storage backends and settings are selectable. Features including data chunk sizes, bit shuffling and compression of data can all be tweaked through the API.
 
 An example of an existing \HDF implementation for storing radar data is \DRF, developed for the Millstone Hill radar of the MIT Haystack observatory near Boston. This is a straightforward \HDF format intended for continuously streaming samples.  The basic idea is to index samples by UNIX time. The format is used at several radars and the code is available on Github~\cite{drf}.
 
@@ -499,7 +504,7 @@ This hierarchy is easy to translate into an \HDF data structure (as the name imp
 % \todo[inline]{Do we have to write something? HH: I don't think we need now}
 
 A plan for benchmarking will be decided, written and performed separately. 
-Packets of simulated \fsru data will be generated and written to files, if possible on machines representing all viable options for the site cluster node architecture. 
+Packets of simulated or actual \fsru data will be generated and written to files.
 
 % CFE: I wrote this but we do not have to specify these here. 
 % Issues to decide upon by benchmarking include:
@@ -710,7 +715,8 @@ This, in principle, will provide better IT security and it will also allow EISCA
 
 The generic \ED metadata schema should take into account the requirement to translate to the DataCite metadata schema~\footnote{Schema version 3.1 or newer would be recommended, see \url{https://schema.datacite.org/}}. 
 This schema ensures interoperability with EUDAT and OpenAIRE services.
-With this in mind we have drafted a specification for DataCite metadata to expose, see \url{https://cryptpad.fr/pad/#/2/pad/edit/5vCPqDOQm0vpZxS3dSYEZwpJ/}
+With this in mind we have drafted a specification for DataCite metadata to expose, see %%\url{https://cryptpad.fr/pad/#/2/pad/edit/5vCPqDOQm0vpZxS3dSYEZwpJ/}
+\url{https://docs.google.com/document/d/198KcoUNp9RsX9d_uoc8caOmOmkEQUmtFIhRo0KLM--A}
 %% Can we get a eiscat.se snapshot of this document?
 
 In addition to the above discussed experiment metadata and generic research data metadata, additional information about the history of dataset creation should be recorded, i.e. provenance and versioning.
@@ -944,5 +950,12 @@ Pros and cons and possible risk mitigation policies of this approach should be c
 \newpage
 \bibliography{main}{}
 \bibliographystyle{unsrt}
+
+\newpage
+\begin{appendices}
+\section{Author Information}
+\label{app:authors}
+\input{authors}
+\end{appendices}
 
 \end{document}
